@@ -9,7 +9,7 @@ export class App extends Component {
       <div>
         <>
         
-        This is first classxxdd</>
+        </>
         
       </div>
     )
