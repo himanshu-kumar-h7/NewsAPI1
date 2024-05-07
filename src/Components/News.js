@@ -79,19 +79,25 @@ export default class News extends Component {
 
   render() {
     return (
-      <div className="container my-3">
-        <h3 style={{ color: "red" }}>Top Headlines</h3>
+      <div className="container ">
+        <h5 style={{ color: "red" }}>Top Headlines</h5>
+        
         <div className="row">
-          <div className="col-md-4">
-            <Newsitem
-              title="myTitle"
-              descrption="myDescription"
-              imageUrl="https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1219926_1296x729.jpg" 
-            />
-          </div>
-          <div className="col-md-4">
-            <Newsitem title="myTitle" descrption="myDescription" />
-          </div>
+        {this.state.articles.map((element)=>{ 
+         return <div className="col-md-4" key={element.url}>
+          <Newsitem
+          
+            title={element.title}
+            descrption={(element.description)}
+            imageUrl={element.urlToImage}
+            newsUrl={element.url}
+          />
+        </div>
+        
+
+})}
+          
+          
           
         </div>
       </div>
