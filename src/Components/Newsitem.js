@@ -5,14 +5,14 @@ export default class Newsitem extends Component {
   
 
   render() {
-    let { title, descrption } = this.props;
+    let { title, descrption,imageUrl,newsUrl } = this.props;
     return (
       <div>
         
         
              
              <div className="card" style={{ width: "18rem" }}>
-          <img src='https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1219926_1296x729.jpg' className="card-img-top" alt="..." />
+          <img src={imageUrl} className="card-img-top" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
             <p className="card-text">
