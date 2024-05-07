@@ -92,9 +92,7 @@ export default class News extends Component {
           <div className="col-md-4">
             <Newsitem title="myTitle" descrption="myDescription" />
           </div>
-          <div className="col-md-4">
-            <Newsitem title="myTitle" descrption="myDescription" />
-          </div>
+          
         </div>
       </div>
     );
