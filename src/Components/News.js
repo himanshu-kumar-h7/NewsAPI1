@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Newsitem from "./Newsitem";
+import Spinner from "./Spinner";
 
 export default class News extends Component {
  
@@ -13,29 +14,34 @@ export default class News extends Component {
   }
   async componentDidMount() {
     let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d62630a63ecf47ddb0794932654a7c8b&pageSize=${this.props.pageSize}`;
+    this.setState({loading : true})
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
-    this.setState ({ articles: parsedData.articles,totalResults : parsedData.totalResults });
+    this.setState ({ articles: parsedData.articles,
+      totalResults : parsedData.totalResults,
+    loading : false });
   }
    handlePrevious = async ()=> {
 console.log("Previous page")
 let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d62630a63ecf47ddb0794932654a7c8b&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
+this.setState({loading : true})
+let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
    
     this.setState({
       page : this.state.page - 1,
-      articles : parsedData.articles
+      articles : parsedData.articles,
+      loading : false 
       
     })
   }
   handleNext = async () => {
 console.log("Next page");
-if(this.state.page + 1 > (Math.ceil(this.state.totalResults/6)) ){
+if(!(this.state.page + 1 > (Math.ceil(this.state.totalResults/6)) )){
 
-} else {
+ 
 let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d62630a63ecf47ddb0794932654a7c8b&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -43,14 +49,16 @@ let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d62630
     
     this.setState({
       page : this.state.page + 1,
-      articles : parsedData.articles 
-  })}}
-
+      articles : parsedData.articles }
+  )}
+  }
   render() 
   {
     return (
       <div className="container">
         <h5 className="text-center my-3" style={{ color: "Purple" }}>Top Headlines for the Day</h5>
+        {this.state.loading && <Spinner />}
+        
 
         <div className="row">
           {this.state.articles.map((element) => {

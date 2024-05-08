@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import loading from './src/loading.gif'
+import loading from './loader.gif'
 
 export default class Spinner extends Component {
   render() {
     return (
-      <div>
-        <img src={loading} alt="loading"> </img>
+      <div className='text-center my-3'>
+        <img src={loading} style={{height : 60,width : 60,color : "red"}} alt="loading"/> 
       </div>
     )
   }
