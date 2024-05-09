@@ -1,8 +1,21 @@
 import React, { Component } from "react";
 import Newsitem from "./Newsitem";
 import Spinner from "./Spinner";
+import PropTypes from 'prop-types'
 
 export default class News extends Component {
+  
+  static defaultProps = {
+    pageSize : 6,
+    country : 'in',
+    category : 'health',
+  }
+  static propTypes = {
+    pageSize : PropTypes.number,
+    country : PropTypes.string,
+    category : PropTypes.string
+  }
+  
  
   constructor() {
     super();
@@ -13,7 +26,7 @@ export default class News extends Component {
     };
   }
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d62630a63ecf47ddb0794932654a7c8b&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d62630a63ecf47ddb0794932654a7c8b&pageSize=${this.props.pageSize}`;
     this.setState({loading : true})
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -24,7 +37,7 @@ export default class News extends Component {
   }
    handlePrevious = async ()=> {
 console.log("Previous page")
-let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d62630a63ecf47ddb0794932654a7c8b&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
+let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d62630a63ecf47ddb0794932654a7c8b&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
 this.setState({loading : true})
 let data = await fetch(url);
     let parsedData = await data.json();
@@ -42,7 +55,7 @@ console.log("Next page");
 if(!(this.state.page + 1 > (Math.ceil(this.state.totalResults/6)) )){
 
  
-let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d62630a63ecf47ddb0794932654a7c8b&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d62630a63ecf47ddb0794932654a7c8b&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
@@ -78,8 +91,8 @@ let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=d62630
           })}
         </div>
         <div className="d-flex justify-content-between">
-          <button disabled={this.state.page <=1} type="button" class="btn btn-secondary glyphicon glyphicon-chevron-right " onClick={this.handlePrevious}> &larr; Previous</button>
-          <button disabled={this.state.page + 1 > (Math.ceil(this.state.totalResults/this.props.pageSize))} type="button" class="btn btn-secondary" onClick={this.handleNext}>Next &rarr;</button>
+          <button disabled={this.state.page <=1} type="button" className="btn btn-secondary glyphicon glyphicon-chevron-right " onClick={this.handlePrevious}> &larr; Previous</button>
+          <button disabled={this.state.page + 1 > (Math.ceil(this.state.totalResults/this.props.pageSize))} type="button" className="btn btn-secondary" onClick={this.handleNext}>Next &rarr;</button>
           
         </div>
       </div>
