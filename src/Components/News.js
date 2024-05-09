@@ -4,10 +4,11 @@ import Spinner from "./Spinner";
 import PropTypes from "prop-types";
 
 export default class News extends Component {
+ 
   static defaultProps = {
     pageSize: 6,
-    country: "in",
-    category: "health",
+    country : "in",
+    category :  "Business"
   };
   static propTypes = {
     pageSize: PropTypes.number,
@@ -24,7 +25,7 @@ export default class News extends Component {
     };
   }
   async updateNews() {
-    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f429d63207e940d0aae386da25779b49&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d62630a63ecf47ddb0794932654a7c8b&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -36,7 +37,7 @@ export default class News extends Component {
     });
   }
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f429d63207e940d0aae386da25779b49&page=1&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d62630a63ecf47ddb0794932654a7c8b&page=1&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
