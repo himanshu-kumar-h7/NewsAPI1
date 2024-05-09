@@ -8,7 +8,7 @@ export default class Navbar extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
             <Link className="navbar-brand" style={{ color: "White" }} to="/">
-              <strong>NewsMonkey🐒</strong>
+              <strong>NewsToday📅</strong>
             </Link>
             <button
               className="navbar-toggler"
@@ -36,7 +36,7 @@ export default class Navbar extends Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/About">
+                  <Link className="nav-link" to="#">
                     About
                   </Link>
                 </li>
